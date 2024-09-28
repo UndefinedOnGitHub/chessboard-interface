@@ -1,0 +1,53 @@
+<div *ngIf="gameViewer?.gameMoves" class="game-viewer-container">
+	<div class="game-changer-buttons-container">
+		<button (click)="previousGame()"><</button>
+	</div>
+	<div class="game-container">
+		<div>
+			<app-chessboard
+				class="main-board"
+				[size]="400"
+				[fen]="gameViewer?.fen"
+				[disabled]="true"
+				[orientation]="gameViewer?.orientation"
+			>
+			</app-chessboard>
+			<p class="game-title">{{gameViewer?.date}}</p>
+			<p class="game-title">
+				<a [href]="gameViewer?.gameLink" target="_blank">
+					{{gameViewer?.title}}
+				</a>
+			</p>
+		</div>
+		<div>
+			<app-chessboard
+				class="fail-board"
+				highlightColor="red"
+				[size]="200"
+				[game]="gameViewerGame"
+				[disabled]="true"
+				[orientation]="gameViewer?.orientation"
+			>
+			</app-chessboard>
+			<app-chessboard
+				class="success-board"
+				[hideBoard]="hideBoard"
+				highlightColor="green"
+				[size]="200"
+				[game]="expectedGameViewerGame"
+				[disabled]="true"
+				[orientation]="gameViewer?.orientation"
+			>
+			</app-chessboard>
+		</div>
+	</div>
+	<div class="game-changer-buttons-container">
+		<button class="fixed-action-btn" (click)="nextGame()">></button>
+	</div>
+</div>
+<div *ngIf="!username" class="username-missing">
+	<div>
+		Go to developer tools cosole and set the localstorage with username
+		<p><code>localStorage.setItem("chesscom_username", username)</code></p>
+	</div>
+</div>
